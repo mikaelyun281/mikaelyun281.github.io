@@ -1,3 +1,6 @@
-Please visit the following link to test "partition_mikael" codes online.
+Please visit https://github.com/mikaelyun281/Partition for the code repository.
 
-mikaelyun281.github.io
+
+Please visit [mikaelyun281.github.io](https://mikaelyun281.github.io/) to test "partition_mikael" codes online.
+
+
