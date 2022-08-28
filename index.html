@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>partition_mikael</title>
+    <script src="https://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+    <script>
+      // Make the div with id 'mycell' a Sage cell
+      sagecell.makeSagecell({
+        inputLocation: "#mycell",
+        template: sagecell.templates.minimal,
+        evalButtonText: "Activate",
+      });
+      // Make *any* div with class 'compute' a Sage cell
+      sagecell.makeSagecell({
+        inputLocation: "div.compute",
+        evalButtonText: "Evaluate",
+      });
+    </script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+
+    <style type="text/css">
+      body {
+        background-color: lightgray;
+        color: darkslategray;
+        font-family: "arial";
+        font-size: 12pt;
+        margin-left: 1.5%;
+        margin-bottom: 12%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Partition_Mikael</h1>
+
+    <br />
+    
+    <p>To download the codes, please visit our 
+    <a href="https://github.com/mikaelyun281/Partition" target="_blank"> 
+      GitHub repository.  
+    </a><br>
+    Please note that testing a too big size of number could exceed acceptable computation time for online IDEs.<br>
+    So we recommend you to test the codes in your personal computer environment by installing an IDE.
+    </p>
+
+
+    <br />
+    <br />
+    <br />
+
+    <h4 style="color:rgb(2, 10, 20);">* Thank you to SageMath for offering an online IDE.</h4>
+
+    <br />
+
+    <h2>Hardy-Ramanujan-Rademacher formula</h2>
+
+    <div class="compute">
+      <script type="text/x-sage">
+import sympy
+
+
+N = 150  # Type only a positive integer for the value "N"
+
+
+print(pari.numbpart(N))
+print(sympy.partition(N))
+
+# These library functions from PARI/GP and Sympy adopt Hardy-Ramanujan-Rademacher formula for the partition of integers.
+
+# See the following documentations for source:
+# 1. http://pari.math.u-bordeaux.fr/dochtml/html/Combinatorics.html#numbpart
+# 2. https://docs.sympy.org/latest/modules/ntheory.html#sympy.ntheory.partitions_.npartitions
+      </script>
+    </div>
+
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+
+
+      <h4 style="color:rgb(2, 10, 20);">* Thank you to JDoodle for offering an online IDE.</h4>
+
+      <br />
+
+      <h2>C</h2>
+
+      
+<form action="https://www.jdoodle.com/api/redirect-to-post/compile-c99-online" method="post">
+  <textarea name="initScript"  rows="16" cols="160">
+#include <stdio.h>
+#include <time.h>
+long first2terms(long N);
+long after_3rd_term = 0;
+long A(long n, long k);
+long B(long n, long k);
+long C(long n);
+long D(long n);
+
+
+
+int main(void) {
+
+  double N = 150;  // Please input a natural number "N" for P(N) at here.
+   
+
+      clock_t start, end;
+      double running_time;
+      start = clock();
+   
+      long n = N-6, k, partition;    
+
+
+      if(N>=0 && N-(int)N == 0){
+           
+         for(n; n>=0; n-=2){
+            k=3+((N-6)-n)/2;
+            A(n,k);
+         }
+           
+         partition = first2terms(N) + after_3rd_term;
+         printf("%ld\n",partition);
+     
+         end = clock();
+         running_time = ((double)(end - start))/CLOCKS_PER_SEC;
+         printf("%s%lf%s\n", "running time: ", running_time, " seconds");   
+      }
+      else{
+         printf("%s\n", "undefined");
+      }
+
+      return 0;
+}
+
+
+long first2terms(long N){
+  
+      if(N==0){
+         return 1;
+      }
+      else{
+         long secondterm = 0;
+         if(N%2==1){
+           secondterm += ((N-3)/2)*((N-3)/2)+((N-3)/2);
+         }
+         else{
+           secondterm += (N/2-1)*(N/2-1);
+         }
+         return N + secondterm;
+      }
+}
+
+
+long A(long n, long k){
+
+     if(n>=k && k>=3){
+        return C(n) + A(n-k, k) + B(n,k); 
+     }  
+     
+     else if(n>=3 && n<k){
+        k=n;
+        return C(n) + A(n-k, k) + B(n,k);
+     }
+
+     else{
+        return C(n);
+     }
+}
+  
+ 
+long B(long n, long k){
+     
+     while(k>3){
+       k--;
+       A(n-k,k);
+     }
+ 
+     return 0;
+} 
+
+
+long C(long n){
+     
+     after_3rd_term += D(n);
+     return after_3rd_term; 
+}
+
+
+long D(long n){
+ 
+     long result = 0;
+    
+     if(n%2==1){
+        result += ((n+1)/2)*((n+1)/2)+((n+1)/2);
+     }
+      
+     else{
+        result += (n/2+1)*(n/2+1);
+     }
+
+     return result;
+} 
+  </textarea>
+  <input type="submit" value="Submit">
+</form>
+<br />
+<br />
+<br />
+<h2>C++</h2>
+
+<form action="https://www.jdoodle.com/api/redirect-to-post/online-compiler-c++14" method="post">
+  <textarea name="initScript"  rows="16" cols="160">
+#include <iostream>
+#include <chrono>
+
+auto start = std::chrono::steady_clock::now();
+
+long first2terms(long N);
+long after_3rd_term = 0;
+long A(long n, long k);
+long B(long n, long k);
+long C(long n);
+long D(long n);
+
+
+
+int main(void) {
+
+  auto N = 150;  // Please input a natural number "N" for P(N) at here.
+   
+   
+      long n = N-6, k, partition;  
+      
+      if(N>=0 && N-(int)N == 0){
+         
+         for(n; n>=0; n-=2){
+            k=3+((N-6)-n)/2;
+            A(n,k);
+         }
+          
+         partition = first2terms(N) + after_3rd_term;
+         std::cout << partition << '\n';
+      
+         auto end = std::chrono::steady_clock::now();
+         auto diff = end - start;
+         std::cout << "running time: " 
+         << std::chrono::duration<double>(diff).count() << " seconds" << '\n'; 
+      
+      }
+      else{
+           std::cout << "undefined" << '\n';
+      }
+
+      return 0;
+  }
+  
+
+long first2terms(long N){
+  
+      if(N==0){
+         return 1;
+      }
+      else{
+         long secondterm = 0;
+         if(N%2==1){
+           secondterm += ((N-3)/2)*((N-3)/2)+((N-3)/2);
+         }
+         else{
+           secondterm += (N/2-1)*(N/2-1);
+         }
+         return N + secondterm;
+      }
+}
+
+
+long A(long n, long k){
+
+     if(n>=k && k>=3){
+        return C(n) + A(n-k, k) + B(n,k); 
+     }  
+
+     else if(n>=3 && n<k){
+        k=n;
+        return C(n) + A(n-k, k) + B(n,k);
+     }
+
+     else{
+        return C(n);
+     }
+}
+  
+ 
+long B(long n, long k){
+     
+     while(k>3){
+       k--;
+       A(n-k,k);
+     }
+ 
+     return 0;
+} 
+
+
+long C(long n){
+
+     after_3rd_term  += D(n);
+     return after_3rd_term;  
+}
+
+
+long D(long n){
+ 
+     long result = 0;
+    
+     if(n%2==1){
+        result += ((n+1)/2)*((n+1)/2)+((n+1)/2);
+     }
+      
+     else{
+        result += (n/2+1)*(n/2+1);
+     }
+
+     return result;
+} 
+    </textarea>
+    <input type="submit" value="Submit">
+  </form>
+ 
+      <br />
+      <br />
+      <br />
+      
+      <h2>Python</h2>
+
+      
+      <form action="https://www.jdoodle.com/api/redirect-to-post/python3-programming-online" method="post">
+              <textarea name="initScript"  rows="16" cols="160">
+      
+      
+import timeit
+timer_start = timeit.default_timer()
+
+
+N = 100  # Please input a natural number "N" for P(N) at here.
+
+
+try:
+    def first2terms(N):
+        if N == 0:
+            return 1
+        else:
+            if N % 2 == 1:
+                secondterm = ((N-3)/2)*((N-3)/2)+((N-3)/2)
+            else:
+                secondterm = (N/2-1)*(N/2-1)
+            return N + secondterm
+
+    def after_3rd_term(N):
+        n = N-6
+        result = 0
+        for n in range(n, -1, -2):
+            k = 3+((N-6)-n)/2
+            result += A(n, k)
+        return result
+
+    def A(n, k):
+        if n >= k and k >= 3:
+            return C(n) + A(n-k, k) + B(n, k)
+        elif n >= 3 and n < k:
+            k = n
+            return C(n) + A(n-k, k) + B(n, k)
+        else:
+            return C(n)
+
+    def B(n, k):
+        send_back = 0
+        while k > 3:
+            k -= 1
+            send_back += A(n-k, k)
+        return send_back
+
+    def C(n):
+        c_result = 0
+        c_result += D(n)
+        return c_result
+
+    def D(n):
+        if n % 2 == 1:
+            return ((n+1)/2)*((n+1)/2)+((n+1)/2)
+        else:
+            return (n/2+1)*(n/2+1)
+
+    partition = int(first2terms(N) + after_3rd_term(N))
+    timer_stop = timeit.default_timer()
+    running_time = round(timer_stop - timer_start, 6)
+
+    if __name__ == '__main__':
+        print(partition, "\n" "running time: ",
+              running_time, " seconds") if N >= 0 else print("undefined")
+
+
+except:
+    print("undefined")
+
+      
+              </textarea>
+              <input type="submit" value="Submit">
+            </form>
+
+            <br />
+            <br />
+            <br />
+            
+            <h2>JavaScript (Node.js)</h2>
+      
+            
+            <form action="https://www.jdoodle.com/api/redirect-to-post/execute-nodejs-online" method="post">
+              <textarea name="initScript"  rows="16" cols="160">
+      
+      
+let N = 150  // Please input a natural number "N" for P(N) at here.
+
+
+let startTime = performance.now()
+
+if (N >= 0 && N - parseInt(N) == 0) {
+
+    function first2terms(N) {
+        if (N == 0) {
+            return 1;
+        }
+        else {
+            let secondterm;
+            if (N % 2 == 1) {
+                secondterm = ((N - 3) / 2) * ((N - 3) / 2) + (N - 3) / 2;
+            } else {
+                secondterm = (N / 2 - 1) * (N / 2 - 1);
+            }
+
+            return N + secondterm;
+        }
+    }
+
+    function after_3rd_term(N) {
+        let n = N - 6;
+        let result = 0;
+        for (n; n >= 0; n -= 2) {
+            let k = 3 + (N - 6 - n) / 2;
+            result += A(n, k);
+        }
+        return result;
+    }
+
+    function A(n, k) {
+        if (n >= k && k >= 3) {
+            return C(n) + A(n - k, k) + B(n, k);
+        } else if (n >= 3 && n < k) {
+            k = n;
+            return C(n) + A(n - k, k) + B(n, k);
+        } else {
+            return C(n);
+        }
+    }
+
+    function B(n, k) {
+        let send_back = 0;
+        while (k > 3) {
+            k--;
+            send_back += A(n - k, k);
+        }
+        return send_back;
+    }
+
+    function C(n) {
+        let c_result = 0;
+        c_result += D(n);
+        return c_result;
+    }
+
+    function D(n) {
+        let result = 0;
+
+        if (n % 2 == 1) {
+            result += ((n + 1) / 2) * ((n + 1) / 2) + (n + 1) / 2;
+        } else {
+            result += (n / 2 + 1) * (n / 2 + 1);
+        }
+
+        return result;
+    }
+
+    let partition = first2terms(N) + after_3rd_term(N);
+    console.log(partition);
+
+    let endTime = performance.now();
+    let duration = ((endTime - startTime) / 1000).toFixed(6);
+    console.log(`running time: ${duration} seconds`);
+}
+
+else {
+    console.log("undefined")
+}
+
+        </textarea>
+        <input type="submit" value="Submit">
+      </form>
+
+  </body>
+</html>
