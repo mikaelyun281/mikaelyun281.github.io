@@ -121,7 +121,7 @@ print(sympy.partition(N))
 #include <stdio.h>
 #include <time.h>
 long first2terms(long N);
-long after_3rd_term = 0;
+long from_3rd_term = 0;
 long A(long n, long k);
 long B(long n, long k);
 long C(long n);
@@ -148,7 +148,7 @@ int main(void) {
             A(n,k);
          }
            
-         partition = first2terms(N) + after_3rd_term;
+         partition = first2terms(N) + from_3rd_term;
          printf("%ld\n",partition);
      
          end = clock();
@@ -211,8 +211,8 @@ long B(long n, long k){
 
 long C(long n){
      
-     after_3rd_term += D(n);
-     return after_3rd_term; 
+     from_3rd_term += D(n);
+     return from_3rd_term; 
 }
 
 
@@ -244,11 +244,8 @@ long D(long n){
   <textarea name="initScript"  rows="16" cols="160">
 #include <iostream>
 #include <chrono>
-
-auto start = std::chrono::steady_clock::now();
-
 long first2terms(long N);
-long after_3rd_term = 0;
+long from_3rd_term = 0;
 long A(long n, long k);
 long B(long n, long k);
 long C(long n);
@@ -260,7 +257,7 @@ int main(void) {
 
   auto N = 120;  // Please input a natural number "N" for P(N) at here.
    
-   
+      auto start = std::chrono::steady_clock::now();
       long n = N-6, k, partition;  
       
       if(N>=0 && N-(int)N == 0){
@@ -270,7 +267,7 @@ int main(void) {
             A(n,k);
          }
           
-         partition = first2terms(N) + after_3rd_term;
+         partition = first2terms(N) + from_3rd_term;
          std::cout << partition << '\n';
       
          auto end = std::chrono::steady_clock::now();
@@ -335,8 +332,8 @@ long B(long n, long k){
 
 long C(long n){
 
-     after_3rd_term  += D(n);
-     return after_3rd_term;  
+     from_3rd_term  += D(n);
+     return from_3rd_term;  
 }
 
 
@@ -387,7 +384,7 @@ try:
                 secondterm = (N/2-1)*(N/2-1)
             return N + secondterm
 
-    def after_3rd_term(N):
+    def from_3rd_term(N):
         n = N-6
         result = 0
         for n in range(n, -1, -2):
@@ -422,7 +419,7 @@ try:
         else:
             return (n/2+1)*(n/2+1)
 
-    partition = int(first2terms(N) + after_3rd_term(N))
+    partition = int(first2terms(N) + from_3rd_term(N))
     timer_stop = timeit.default_timer()
     running_time = round(timer_stop - timer_start, 6)
 
@@ -473,7 +470,7 @@ if (N >= 0 && N - parseInt(N) == 0) {
         }
     }
 
-    function after_3rd_term(N) {
+    function from_3rd_term(N) {
         let n = N - 6;
         let result = 0;
         for (n; n >= 0; n -= 2) {
@@ -521,7 +518,7 @@ if (N >= 0 && N - parseInt(N) == 0) {
         return result;
     }
 
-    let partition = first2terms(N) + after_3rd_term(N);
+    let partition = first2terms(N) + from_3rd_term(N);
     console.log(partition);
 
     let endTime = performance.now();
@@ -552,7 +549,7 @@ public class partition_mikael {
 
         if (N >= 0) {
             long startTime = System.nanoTime();
-            long partition = first2terms(N) + expansion.after_3rd_term(N);
+            long partition = first2terms(N) + expansion.from_3rd_term(N);
 
             long endTime = System.nanoTime();
             long totalTime = (endTime - startTime) / 1000000000;
@@ -579,7 +576,7 @@ public class partition_mikael {
 }
 
 class expansion {
-    static long after_3rd_term(long N) {
+    static long from_3rd_term(long N) {
         long result = 0;
         for (long n = N - 6; n >= 0; n -= 2) {
             long k = 3 + ((N - 6) - n) / 2;
@@ -652,7 +649,7 @@ namespace Partition
             if (N >= 0)
             {
                 var watch = System.Diagnostics.Stopwatch.StartNew();
-                long partition = I.first2terms(N) + II.after_3rd_term(N);
+                long partition = I.first2terms(N) + II.from_3rd_term(N);
 
                 watch.Stop();
                 var elapsedMs = (watch.ElapsedMilliseconds) / 1000;
@@ -689,7 +686,7 @@ namespace Partition
 
     class II
     {
-        internal static long after_3rd_term(long N)
+        internal static long from_3rd_term(long N)
         {
             long result = 0;
             for (long n = N - 6; n >= 0; n -= 2)
@@ -769,7 +766,7 @@ namespace Partition
 #include <stdio.h>
 #include <time.h>
 long first2terms(long N);
-long after_3rd_term = 0;
+long from_3rd_term = 0;
 long expansion(long n, long k);
 
 
@@ -792,7 +789,7 @@ int main(void) {
             expansion(n,k);
          }
            
-         partition = first2terms(N) + after_3rd_term;
+         partition = first2terms(N) + from_3rd_term;
          printf("%ld\n",partition);
      
          end = clock();
@@ -831,12 +828,12 @@ long expansion(long n, long k){
      else{}
     
      if(n%2==1){
-         after_3rd_term += ((n+1)/2)*((n+1)/2)+((n+1)/2);
+         from_3rd_term += ((n+1)/2)*((n+1)/2)+((n+1)/2);
      }
      else{
-         after_3rd_term += (n/2+1)*(n/2+1);
+         from_3rd_term += (n/2+1)*(n/2+1);
      }
-     return after_3rd_term;     
+     return from_3rd_term;     
 }
 
         </textarea><br>
@@ -855,7 +852,7 @@ long expansion(long n, long k){
 #include <iostream>
 #include <chrono>
 long first2terms(long N);
-long after_3rd_term = 0;
+long from_3rd_term = 0;
 long expansion(long n, long k);
 
 
@@ -874,7 +871,7 @@ int main(void) {
             expansion(n,k);
          }
           
-         partition = first2terms(N) + after_3rd_term;
+         partition = first2terms(N) + from_3rd_term;
          std::cout << partition << '\n';
       
          auto end = std::chrono::steady_clock::now();
@@ -915,12 +912,12 @@ long expansion(long n, long k){
      else{}
    
      if(n%2==1){
-         after_3rd_term += ((n+1)/2)*((n+1)/2)+((n+1)/2);
+         from_3rd_term += ((n+1)/2)*((n+1)/2)+((n+1)/2);
      }
      else{
-         after_3rd_term += (n/2+1)*(n/2+1);
+         from_3rd_term += (n/2+1)*(n/2+1);
      }
-     return after_3rd_term;     
+     return from_3rd_term;     
 }          
 
         </textarea><br>
@@ -950,7 +947,7 @@ long expansion(long n, long k){
 #include <iostream>
 #include <chrono>
 long first2terms(long N);
-long after_3rd_term = 0;
+long from_3rd_term = 0;
 long A(long n, long k);
 long B(long n, long k);
 long C(long n);
@@ -971,7 +968,7 @@ int main(void) {
             A(n,k);
          }
           
-         partition = first2terms(N) + after_3rd_term;
+         partition = first2terms(N) + from_3rd_term;
          std::cout << partition << '\n';
       
          auto end = std::chrono::steady_clock::now();
@@ -1036,8 +1033,8 @@ long B(long n, long k){
 
 long C(long n){
 
-     after_3rd_term  += D(n);
-     return after_3rd_term;  
+     from_3rd_term  += D(n);
+     return from_3rd_term;  
 }
 
 
@@ -1047,27 +1044,27 @@ long D(long n){
     
      if(n%6==1){
         a = (n-1)/6;
-        after_3rd_term += 6*a*a*a+(27*a*a)/2+(19*a)/2+2;
+        from_3rd_term += 6*a*a*a+(27*a*a)/2+(19*a)/2+2;
      }
      else if(n%6==2){
         a = (n-2)/6;
-        after_3rd_term += 6*a*a*a+(33*a*a)/2+(29*a)/2+4;
+        from_3rd_term += 6*a*a*a+(33*a*a)/2+(29*a)/2+4;
      }
      else if(n%6==3){
         a = (n-3)/6;
-        after_3rd_term += 6*a*a*a+(39*a*a)/2+(41*a)/2+7; 
+        from_3rd_term += 6*a*a*a+(39*a*a)/2+(41*a)/2+7; 
      }
      else if(n%6==4){
         a = (n-4)/6;
-        after_3rd_term += 6*a*a*a+(45*a*a)/2+(55*a)/2+11; 
+        from_3rd_term += 6*a*a*a+(45*a*a)/2+(55*a)/2+11; 
      }
      else if(n%6==5){
         a = (n-5)/6;
-        after_3rd_term += 6*a*a*a+(51*a*a)/2+(71*a)/2+16;
+        from_3rd_term += 6*a*a*a+(51*a*a)/2+(71*a)/2+16;
      }
      else {
         a = n/6;
-        after_3rd_term += 6*a*a*a+(21*a*a)/2+(11*a)/2+1;
+        from_3rd_term += 6*a*a*a+(21*a*a)/2+(11*a)/2+1;
      }
 
      return result;
@@ -1089,7 +1086,7 @@ long D(long n){
 #include <iostream>
 #include <chrono>
 long first2terms(long N);
-long after_3rd_term = 0;
+long from_3rd_term = 0;
 long expansion(long n, long k);
 
 
@@ -1108,7 +1105,7 @@ int main(void) {
             expansion(n,k);
          }
           
-         partition = first2terms(N) + after_3rd_term;
+         partition = first2terms(N) + from_3rd_term;
          std::cout << partition << '\n';
       
          auto end = std::chrono::steady_clock::now();
@@ -1152,29 +1149,29 @@ long expansion(long n, long k){
    
      if(n%6==1){
         a = (n-1)/6;
-        after_3rd_term += 6*a*a*a+(27*a*a)/2+(19*a)/2+2;
+        from_3rd_term += 6*a*a*a+(27*a*a)/2+(19*a)/2+2;
      }
      else if(n%6==2){
         a = (n-2)/6;
-        after_3rd_term += 6*a*a*a+(33*a*a)/2+(29*a)/2+4;
+        from_3rd_term += 6*a*a*a+(33*a*a)/2+(29*a)/2+4;
      }
      else if(n%6==3){
         a = (n-3)/6;
-        after_3rd_term += 6*a*a*a+(39*a*a)/2+(41*a)/2+7; 
+        from_3rd_term += 6*a*a*a+(39*a*a)/2+(41*a)/2+7; 
      }
      else if(n%6==4){
         a = (n-4)/6;
-        after_3rd_term += 6*a*a*a+(45*a*a)/2+(55*a)/2+11; 
+        from_3rd_term += 6*a*a*a+(45*a*a)/2+(55*a)/2+11; 
      }
      else if(n%6==5){
         a = (n-5)/6;
-        after_3rd_term += 6*a*a*a+(51*a*a)/2+(71*a)/2+16;
+        from_3rd_term += 6*a*a*a+(51*a*a)/2+(71*a)/2+16;
      }
      else {
         a = n/6;
-        after_3rd_term += 6*a*a*a+(21*a*a)/2+(11*a)/2+1;
+        from_3rd_term += 6*a*a*a+(21*a*a)/2+(11*a)/2+1;
      }
-     return after_3rd_term;     
+     return from_3rd_term;     
 }        
 
     </textarea><br>
@@ -1211,7 +1208,7 @@ if (N >= 0 && N - parseInt(N) == 0) {
         }
     }
 
-    function after_3rd_term(N) {
+    function from_3rd_term(N) {
         let n = N - 6;
         let result = 0;
         for (n; n >= 0; n -= 2) {
@@ -1273,7 +1270,7 @@ if (N >= 0 && N - parseInt(N) == 0) {
         return result;
     }
 
-    let partition = first2terms(N) + after_3rd_term(N);
+    let partition = first2terms(N) + from_3rd_term(N);
     console.log(partition);
 
     let endTime = performance.now();
@@ -1336,22 +1333,26 @@ if(n-int(n) == 0 and k-int(k) == 0 and n >=0 and k >= 0):
         if n>=k and k>0:    
             for n in range(n-1, n-k-1, -1):
                 k=m-n
-                result += A(n,k)
+                if k == 1:
+                    result += 1
+                else:
+                    result += A(n,k)
             return result  
         elif k>n and n != 0 and k>0:
             k=n
             for n in range(n-1, n-k-1, -1):
                 k=m-n
-                result += A(n,k)
+                if k == 1:
+                    result += 1
+                else:
+                    result += A(n,k)
             return result  
         else:
             return 1
 
 
     def A(n, k):
-        if n >=k and k == 1:
-            return 1
-        elif n >= k and k >= 3:
+        if n >= k and k >= 3:
             return C(n) + A(n-k, k) + B(n, k)
         elif n >= 3 and n < k:
             k = n
@@ -1431,7 +1432,11 @@ public class partition_by_size {
         if (n >= k && k > 0) {
             for (n -= 1; n >= lower_limit; n -= 1) {
                 k = m - n;
-                result += A(n, k);
+                if (k == 1) {
+                    result += 1;
+                } else {
+                    result += A(n, k);
+                }
             }
             return result;
         } else if (k > n && n != 0 && k > 0) {
@@ -1439,7 +1444,11 @@ public class partition_by_size {
             lower_limit = n - k;
             for (n -= 1; n >= lower_limit; n -= 1) {
                 k = m - n;
-                result += A(n, k);
+                if (k == 1) {
+                    result += 1;
+                } else {
+                    result += A(n, k);
+                }
             }
             return result;
         } else {
@@ -1448,9 +1457,7 @@ public class partition_by_size {
     }
 
     private static long A(long n, long k) {
-        if (n >= k && k == 1) {
-            return 1;
-        } else if (n >= k && k >= 3) {
+        if (n >= k && k >= 3) {
             return C(n) + A(n - k, k) + B(n, k);
         } else if (n >= 3 && n < k) {
             k = n;
@@ -1522,7 +1529,8 @@ if (n - parseInt(n) == 0 && k - parseInt(k) == 0 && n >= 0 && k >= 0) {
         if (n >= k && k > 0) {
             for (n -= 1; n >= lowerlimit; n -= 1) {
                 k = m - n;
-                result += A(n, k);
+                if (n >= k && k == 1) {result += 1;}
+                else {result += A(n, k);}
             }
             return result;
         }
@@ -1530,7 +1538,8 @@ if (n - parseInt(n) == 0 && k - parseInt(k) == 0 && n >= 0 && k >= 0) {
             k = n, lowerlimit = n - k;
             for (n -= 1; n >= lowerlimit; n -= 1) {
                 k = m - n;
-                result += A(n, k);
+                if (n >= k && k == 1) {result += 1;}
+                else {result += A(n, k);}
             }
             return result;
         }
@@ -1540,10 +1549,7 @@ if (n - parseInt(n) == 0 && k - parseInt(k) == 0 && n >= 0 && k >= 0) {
     }
 
     function A(n, k) {
-        if (n >= k && k == 1) {
-            return 1;
-        }
-        else if (n >= k && k >= 3) {
+        if (n >= k && k >= 3) {
             return C(n) + A(n - k, k) + B(n, k);
         }
         else if (n >= 3 && n < k) {
@@ -1650,14 +1656,16 @@ long expansionI(long n, long k){
         long m=n, limitlength = n-k;
         for(n-=1; n>=limitlength; n-=1){ 
             k=m-n;
-            expansionII(n,k);
+            if (k == 1) {result += 1;}
+            else {expansionII(n,k);}
         }
      }
      else if (k > n && n != 0 && k != 0) {
         long m=n, k=n, limitlength = n-k;
         for(n-=1; n>=limitlength; n-=1){ 
             k=m-n;
-            expansionII(n,k);
+            if (k == 1) {result += 1;}
+            else {expansionII(n,k);}
         }
      }
      else {
@@ -1669,8 +1677,7 @@ long expansionI(long n, long k){
 
 long expansionII(long n, long k){
 
-     if (n >= k && k == 1) {return result += 1;}
-     else if(n>=k && k>=3){
+     if(n>=k && k>=3){
         for(k; k>=3; k--)expansionII(n-k,k);}  
      else if(n>=3 && n<k){k=n;
         for(k; k>=3; k--)expansionII(n-k,k);}
@@ -1740,14 +1747,16 @@ long expansionI(long n, long k){
         long m=n, limitlength = n-k;
         for(n-=1; n>=limitlength; n-=1){ 
             k=m-n;
-            expansionII(n,k);
+            if (k == 1) {result += 1;}
+            else{expansionII(n,k);}
         }
      }
      else if (k > n && n != 0 && k != 0) {
         long m=n, k=n, limitlength = n-k;
         for(n-=1; n>=limitlength; n-=1){ 
             k=m-n;
-            expansionII(n,k);
+            if (k == 1) {result += 1;}
+            else{expansionII(n,k);}
         }
      }
      else {
@@ -1759,8 +1768,7 @@ long expansionI(long n, long k){
 
 long expansionII(long n, long k){
 
-     if (n >= k && k == 1) {return result += 1;}
-     else if(n>=k && k>=3){
+     if(n>=k && k>=3){
         for(k; k>=3; k--)expansionII(n-k,k);}  
      else if(n>=3 && n<k){k=n;
         for(k; k>=3; k--)expansionII(n-k,k);}
@@ -1823,7 +1831,17 @@ public class partition_by_size_m_3 {
         if (n >= k && k > 0) {
             for (n -= 1; n >= lower_limit; n -= 1) {
                 k = m - n;
-                result += A(n, k);
+                if (k == 1) {
+                    result += 1;
+                } else if (k == 2) {
+                    if (n % 2 == 1) {
+                        result += (n + 1) / 2;
+                    } else {
+                        result += (n / 2) + 1;
+                    }
+                } else {
+                    result += A(n, k);
+                }
             }
             return result;
         } else if (k > n && n != 0 && k > 0) {
@@ -1831,7 +1849,17 @@ public class partition_by_size_m_3 {
             lower_limit = n - k;
             for (n -= 1; n >= lower_limit; n -= 1) {
                 k = m - n;
-                result += A(n, k);
+                if (k == 1) {
+                    result += 1;
+                } else if (k == 2) {
+                    if (n % 2 == 1) {
+                        result += (n + 1) / 2;
+                    } else {
+                        result += (n / 2) + 1;
+                    }
+                } else {
+                    result += A(n, k);
+                }
             }
             return result;
         } else {
@@ -1840,15 +1868,8 @@ public class partition_by_size_m_3 {
     }
 
     private static long A(long n, long k) {
-        if (n >= k && k == 1) {
-            return 1;
-        } else if (n >= k && k == 2) {
-            if (n % 2 == 1) {
-                return (n + 1) / 2;
-            } else {
-                return (n / 2) + 1;
-            }
-        } else if (n >= k && k >= 4) {
+       
+        if (n >= k && k >= 4) {
             return C(n) + A(n - k, k) + B(n, k);
         } else if (n >= 4 && n < k) {
             k = n;
@@ -1933,7 +1954,15 @@ if (n - parseInt(n) == 0 && k - parseInt(k) == 0 && n >= 0 && k >= 0) {
         if (n >= k && k > 0) {
             for (n -= 1; n >= lowerlimit; n -= 1) {
                 k = m - n;
-                result += A(n, k);
+                if (n >= k && k == 1) {result += 1;}
+                else if (n >= k && k == 2) {
+                    if (n % 2 == 1) {
+                        result += (n + 1) / 2;
+                    } else {
+                        result += (n / 2) + 1;
+                    }
+                } 
+                else {result += A(n, k);}
             }
             return result;
         }
@@ -1941,7 +1970,15 @@ if (n - parseInt(n) == 0 && k - parseInt(k) == 0 && n >= 0 && k >= 0) {
             k = n, lowerlimit = n - k;
             for (n -= 1; n >= lowerlimit; n -= 1) {
                 k = m - n;
-                result += A(n, k);
+                if (n >= k && k == 1) {result += 1;}
+                else if (n >= k && k == 2) {
+                    if (n % 2 == 1) {
+                        result += (n + 1) / 2;
+                    } else {
+                        result += (n / 2) + 1;
+                    }
+                } 
+                else {result += A(n, k);}
             }
             return result;
         }
@@ -1951,15 +1988,7 @@ if (n - parseInt(n) == 0 && k - parseInt(k) == 0 && n >= 0 && k >= 0) {
     }
 
     function A(n, k) {
-        if (n >= k && k == 1) {
-            return 1;
-        } else if (n >= k && k == 2) {
-            if (n % 2 == 1) {
-                return (n + 1) / 2;
-            } else {
-                return (n / 2) + 1;
-            }
-        } else if (n >= k && k >= 4) {
+        if (n >= k && k >= 4) {
             return C(n) + A(n - k, k) + B(n, k);
         }
         else if (n >= 4 && n < k) {
@@ -2080,14 +2109,30 @@ long expansionI(long n, long k){
         long m=n, limitlength = n-k;
         for(n-=1; n>=limitlength; n-=1){ 
             k=m-n;
-            expansionII(n,k);
+            if (k == 1){result += 1;}
+            else if (k == 2){
+                if (n % 2 == 1) {
+                result += (n+1) / 2;
+                } else {
+                result += (n/2) + 1;
+                }
+            } 
+            else{expansionII(n,k);}
         }
      }
      else if (k > n && n != 0 && k != 0) {
         long m=n, k=n, limitlength = n-k;
         for(n-=1; n>=limitlength; n-=1){ 
             k=m-n;
-            expansionII(n,k);
+            if (k == 1){result += 1;}
+            else if (k == 2){
+                if (n % 2 == 1) {
+                result += (n+1) / 2;
+                } else {
+                result += (n/2) + 1;
+                }
+            } 
+            else{expansionII(n,k);}
         }
      }
      else {
@@ -2099,15 +2144,7 @@ long expansionI(long n, long k){
 
 long expansionII(long n, long k){
 
-     if (n >= k && k == 1) {return result += 1;}
-     else if (n >= k && k == 2) {
-        if (n % 2 == 1) {
-            return result += (n+1) / 2;
-        } else {
-            return result += (n/2) + 1;
-        }
-     } 
-     else if(n>=k && k>=4){
+     if(n>=k && k>=4){
         for(k; k>=4; k--)expansionII(n-k,k);}  
      else if(n>=4 && n<k){k=n;
         for(k; k>=4; k--)expansionII(n-k,k);}
